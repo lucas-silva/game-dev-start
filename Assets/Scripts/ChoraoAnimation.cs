@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,10 +35,13 @@ public class ChoraoAnimation : MonoBehaviour
 
     void Update()
     {
-        animator.SetInteger(transitionParameterName, (int)GetAnimationState());
+        SetAnimationByState();
+        RotateTowardsMovingDirection();
+    }
 
-        var direction = GetDirection();
-        if (direction.HasValue) transform.eulerAngles = DirectionMap[direction.Value];
+    private void SetAnimationByState()
+    {
+        animator.SetInteger(transitionParameterName, (int)GetAnimationState());
     }
 
     private AnimationState GetAnimationState()
@@ -47,6 +49,12 @@ public class ChoraoAnimation : MonoBehaviour
         var isMoving = chorao.direction.sqrMagnitude > 0;
         var state = isMoving ? AnimationState.walking : AnimationState.idle;
         return state;
+    }
+
+    private void RotateTowardsMovingDirection()
+    {
+        var direction = GetDirection();
+        if (direction.HasValue) transform.eulerAngles = DirectionMap[direction.Value];
     }
 
     private Direction? GetDirection()
