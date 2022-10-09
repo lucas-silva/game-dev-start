@@ -16,6 +16,18 @@ public class ChoraoAnimation : MonoBehaviour
         walking = 1,
     }
 
+    private enum Direction
+    {
+        Right,
+        Left
+    }
+
+    static readonly Dictionary<Direction, Vector2> DirectionMap = new Dictionary<Direction, Vector2>
+    {
+        { Direction.Right, new Vector2(0, 0) },
+        { Direction.Left, new Vector2(0, 180) },
+    };
+
     void Start()
     {
         chorao = GetComponent<Chorao>();
@@ -25,6 +37,9 @@ public class ChoraoAnimation : MonoBehaviour
     void Update()
     {
         animator.SetInteger(transitionParameterName, (int)GetAnimationState());
+
+        var direction = GetDirection();
+        if (direction.HasValue) transform.eulerAngles = DirectionMap[direction.Value];
     }
 
     private AnimationState GetAnimationState()
@@ -32,5 +47,12 @@ public class ChoraoAnimation : MonoBehaviour
         var isMoving = chorao.direction.sqrMagnitude > 0;
         var state = isMoving ? AnimationState.walking : AnimationState.idle;
         return state;
+    }
+
+    private Direction? GetDirection()
+    {
+        if (chorao.direction.x > 0) return Direction.Right;
+        if (chorao.direction.x < 0) return Direction.Left;
+        return null;
     }
 }
