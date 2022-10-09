@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ChoraoAnimation : MonoBehaviour
 {
+    static readonly string transitionParameterName = "transition";
+
     private Chorao chorao;
 
     private Animator animator;
@@ -22,7 +24,7 @@ public class ChoraoAnimation : MonoBehaviour
 
     void Update()
     {
-        animator.SetInteger("transition", (int)GetAnimationState());
+        animator.SetInteger(transitionParameterName, (int)GetAnimationState());
     }
 
     private AnimationState GetAnimationState()
