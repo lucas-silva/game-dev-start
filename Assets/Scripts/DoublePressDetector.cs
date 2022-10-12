@@ -24,7 +24,7 @@ public class DoublePressDetector : MonoBehaviour
 
         if (!Input.anyKeyDown) return;
 
-        var keyDownCode = arrows.Single(arrow => Input.GetKeyDown(arrow));
+        var keyDownCode = arrows.First(arrow => Input.GetKeyDown(arrow));
 
         var otherDirection = pressedKeys.Any() && pressedKeys.Any(x => x.keyCode != keyDownCode);
 
