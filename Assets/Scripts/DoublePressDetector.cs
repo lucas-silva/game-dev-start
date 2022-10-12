@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Linq;
 
 public class DoublePressDetector : MonoBehaviour
@@ -16,7 +15,6 @@ public class DoublePressDetector : MonoBehaviour
     {
         var direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         var iddle = direction.sqrMagnitude == 0;
-
         if (iddle && HasBeenPressedTwice)
         {
             HasBeenPressedTwice = false;
@@ -26,6 +24,8 @@ public class DoublePressDetector : MonoBehaviour
         if (!Input.anyKeyDown) return;
 
         var keyDown = observeKeyCodes.First(arrow => Input.GetKeyDown(arrow));
+
+        if (keyDown == KeyCode.None) return;
 
         var otherDirection = pressed.Any() && pressed.Any(x => x.keyCode != keyDown);
         if (otherDirection) pressed.Clear();
@@ -37,21 +37,5 @@ public class DoublePressDetector : MonoBehaviour
         var first = pressed[0];
         var second = pressed[1];
         HasBeenPressedTwice = second.keyDownAt - first.keyDownAt < doublePressInterval;
-    }
-}
-
-public class SizedList<T> : List<T>
-{
-    private readonly int KeepLastN;
-
-    public SizedList(int keepLastN) : base()
-    {
-        KeepLastN = keepLastN;
-    }
-
-    public new void Add(T item)
-    {
-        base.Add(item);
-        if (Count > KeepLastN) RemoveAt(0);
     }
 }
