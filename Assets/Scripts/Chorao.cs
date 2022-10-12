@@ -12,7 +12,7 @@ public class Chorao : MonoBehaviour
     {
         get
         {
-            return direction != null && direction.sqrMagnitude > 0;
+            return direction.sqrMagnitude > 0;
         }
     }
 
@@ -20,7 +20,7 @@ public class Chorao : MonoBehaviour
     {
         get
         {
-            return doublePressDetector != null && doublePressDetector.HasBeenPressedTwice;
+            return doublePressDetector.HasBeenPressedTwice;
         }
     }
 

@@ -8,15 +8,16 @@ public class DoublePressDetector : MonoBehaviour
 
     public bool HasBeenPressedTwice { get; private set; }
 
-    private readonly static KeyCode[] arrows = new[] { KeyCode.DownArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.LeftArrow };
+    private readonly static KeyCode[] observeKeyCodes = new[] { KeyCode.DownArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.LeftArrow };
 
-    private SizedList<(KeyCode keyCode, float keyDownAt)> pressedKeys = new(2);
+    private readonly SizedList<(KeyCode keyCode, float keyDownAt)> pressed = new(2);
 
     private void Update()
     {
         var direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        
-        if (direction.sqrMagnitude == 0 && HasBeenPressedTwice)
+        var iddle = direction.sqrMagnitude == 0;
+
+        if (iddle && HasBeenPressedTwice)
         {
             HasBeenPressedTwice = false;
             return;
@@ -24,18 +25,17 @@ public class DoublePressDetector : MonoBehaviour
 
         if (!Input.anyKeyDown) return;
 
-        var keyDownCode = arrows.First(arrow => Input.GetKeyDown(arrow));
+        var keyDown = observeKeyCodes.First(arrow => Input.GetKeyDown(arrow));
 
-        var otherDirection = pressedKeys.Any() && pressedKeys.Any(x => x.keyCode != keyDownCode);
-
-        if (otherDirection) pressedKeys.Clear();
+        var otherDirection = pressed.Any() && pressed.Any(x => x.keyCode != keyDown);
+        if (otherDirection) pressed.Clear();
         
-        pressedKeys.Add((keyDownCode, Time.time));
+        pressed.Add((keyDown, Time.time));
 
-        if (pressedKeys.Count() < 2) return;
+        if (pressed.Count() < 2) return;
 
-        var first = pressedKeys[0];
-        var second = pressedKeys[1];
+        var first = pressed[0];
+        var second = pressed[1];
         HasBeenPressedTwice = second.keyDownAt - first.keyDownAt < doublePressInterval;
     }
 }
