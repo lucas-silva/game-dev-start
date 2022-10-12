@@ -13,9 +13,8 @@ public class DoublePressDetector : MonoBehaviour
 
     private void Update()
     {
-        var direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        var iddle = direction.sqrMagnitude == 0;
-        if (iddle && HasBeenPressedTwice)
+        var reset = IsIddle() && HasBeenPressedTwice;
+        if (reset)
         {
             HasBeenPressedTwice = false;
             return;
@@ -29,7 +28,7 @@ public class DoublePressDetector : MonoBehaviour
 
         var otherDirection = pressed.Any() && pressed.Any(x => x.keyCode != keyDown);
         if (otherDirection) pressed.Clear();
-        
+
         pressed.Add((keyDown, Time.time));
 
         if (pressed.Count() < 2) return;
@@ -37,5 +36,12 @@ public class DoublePressDetector : MonoBehaviour
         var first = pressed[0];
         var second = pressed[1];
         HasBeenPressedTwice = second.keyDownAt - first.keyDownAt < doublePressInterval;
+    }
+
+    private static bool IsIddle()
+    {
+        var direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        var iddle = direction.sqrMagnitude == 0;
+        return iddle;
     }
 }
