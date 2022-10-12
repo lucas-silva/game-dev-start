@@ -22972,7 +22972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a791f1760adb34e6bb63d117f6c630c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doublePressInterval: 0.5
+  doublePressInterval: 0.2
 --- !u!1 &2020343187
 GameObject:
   m_ObjectHideFlags: 0
