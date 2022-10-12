@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 using System.Linq;
-using System;
 
 public class DoublePressDetector : MonoBehaviour
 {
@@ -12,7 +10,7 @@ public class DoublePressDetector : MonoBehaviour
 
     private readonly static KeyCode[] arrows = new[] { KeyCode.DownArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.LeftArrow };
 
-    private List<(KeyCode keyCode, float keyDownAt)> lastKeyDown = new List<(KeyCode keyCode, float keyDownAt)>();
+    private SizedList<(KeyCode keyCode, float keyDownAt)> pressedKeys = new(2);
 
     private void Update()
     {
@@ -28,19 +26,32 @@ public class DoublePressDetector : MonoBehaviour
 
         var keyDownCode = arrows.Single(arrow => Input.GetKeyDown(arrow));
 
-        var otherDirection = lastKeyDown.Any() && lastKeyDown.Any(x => x.keyCode != keyDownCode);
+        var otherDirection = pressedKeys.Any() && pressedKeys.Any(x => x.keyCode != keyDownCode);
 
-        if (otherDirection) lastKeyDown.Clear();
+        if (otherDirection) pressedKeys.Clear();
         
-        lastKeyDown.Add((keyDownCode, Time.time));
+        pressedKeys.Add((keyDownCode, Time.time));
 
-        if (lastKeyDown.Count() == 3) lastKeyDown.RemoveAt(0);
+        if (pressedKeys.Count() < 2) return;
 
-        if (lastKeyDown.Count() < 2) return;
-
-        var lastCalls = lastKeyDown.TakeLast(2).ToList();
-        var first = lastCalls[0];
-        var second = lastCalls[1];
+        var first = pressedKeys[0];
+        var second = pressedKeys[1];
         HasBeenPressedTwice = second.keyDownAt - first.keyDownAt < doublePressInterval;
+    }
+}
+
+public class SizedList<T> : List<T>
+{
+    private readonly int KeepLastN;
+
+    public SizedList(int keepLastN) : base()
+    {
+        KeepLastN = keepLastN;
+    }
+
+    public new void Add(T item)
+    {
+        base.Add(item);
+        if (Count > KeepLastN) RemoveAt(0);
     }
 }
