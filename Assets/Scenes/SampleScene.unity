@@ -22788,9 +22788,10 @@ GameObject:
   - component: {fileID: 1787146162}
   - component: {fileID: 1787146163}
   - component: {fileID: 1787146164}
-  - component: {fileID: 1787146165}
   - component: {fileID: 1787146166}
+  - component: {fileID: 1787146165}
   - component: {fileID: 1787146167}
+  - component: {fileID: 1787146168}
   m_Layer: 0
   m_Name: Chorao
   m_TagString: Untagged
@@ -22924,7 +22925,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8521a7dce76740f0b171607e0f20c36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 5
+  runningSpeed: 10
+  direction: {x: 0, y: 0}
 --- !u!95 &1787146166
 Animator:
   serializedVersion: 4
@@ -22957,6 +22960,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 687706a7925c54ff0bc4eec07c0d30a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1787146168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787146160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a791f1760adb34e6bb63d117f6c630c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doublePressInterval: 0.5
 --- !u!1 &2020343187
 GameObject:
   m_ObjectHideFlags: 0

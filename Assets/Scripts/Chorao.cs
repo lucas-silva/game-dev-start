@@ -4,13 +4,42 @@ public class Chorao : MonoBehaviour
 {
     public float speed;
 
+    public float runningSpeed;
+
     public Vector2 direction;
 
+    public bool IsMoving
+    {
+        get
+        {
+            return direction != null && direction.sqrMagnitude > 0;
+        }
+    }
+
+    public bool IsRunning
+    {
+        get
+        {
+            return doublePressDetector != null && doublePressDetector.HasBeenPressedTwice;
+        }
+    }
+
+    private float CurrentSpeed
+    {
+        get
+        {
+            return IsRunning ? runningSpeed : speed;
+        }
+    }
+
     private Rigidbody2D rigbody;
+
+    private DoublePressDetector doublePressDetector;
 
     private void Start()
     {
         rigbody = GetComponent<Rigidbody2D>();
+        doublePressDetector = GetComponent<DoublePressDetector>();
     }
 
     private void Update()
@@ -20,6 +49,6 @@ public class Chorao : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigbody.MovePosition(direction * speed * Time.fixedDeltaTime + rigbody.position);
+        rigbody.MovePosition(CurrentSpeed * Time.fixedDeltaTime * direction + rigbody.position);
     }
 }
