@@ -20,7 +20,7 @@ public class Chorao : MonoBehaviour
     {
         get
         {
-            return doublePressDetector.HasBeenPressedTwice;
+            return doubleKeyDownDetector.HasBeenPressedTwice;
         }
     }
 
@@ -34,12 +34,12 @@ public class Chorao : MonoBehaviour
 
     private Rigidbody2D rigbody;
 
-    private DoublePressDetector doublePressDetector;
+    private DoubleKeyDownDetector doubleKeyDownDetector;
 
     private void Start()
     {
         rigbody = GetComponent<Rigidbody2D>();
-        doublePressDetector = GetComponent<DoublePressDetector>();
+        doubleKeyDownDetector = GetComponent<DoubleKeyDownDetector>();
     }
 
     private void Update()

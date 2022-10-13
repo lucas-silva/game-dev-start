@@ -1,9 +1,7 @@
-﻿using UnityEngine;
-using System.Linq;
-using System.Linq;
-using System;
+﻿using System.Linq;
+using UnityEngine;
 
-public class DoublePressDetector : MonoBehaviour
+public class DoubleKeyDownDetector : MonoBehaviour
 {
     public float doublePressInterval;
 
