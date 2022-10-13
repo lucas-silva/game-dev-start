@@ -28,9 +28,9 @@ public class ChoraoAnimation : MonoBehaviour
 
     private AnimationState GetAnimationState()
     {
-        if (chorao.IsRunning) return AnimationState.running;
-        if (chorao.IsMoving) return AnimationState.walking;
-        return AnimationState.idle;
+        if (chorao.IsRunning) return AnimationState.Running;
+        if (chorao.IsMoving) return AnimationState.Walking;
+        return AnimationState.Idle;
     }
 
     private void RotateTowardsMovingDirection()
@@ -48,9 +48,9 @@ public class ChoraoAnimation : MonoBehaviour
 
     private enum AnimationState
     {
-        idle = 0,
-        walking = 1,
-        running = 2,
+        Idle = 0,
+        Walking = 1,
+        Running = 2,
     }
 
     private enum Direction
