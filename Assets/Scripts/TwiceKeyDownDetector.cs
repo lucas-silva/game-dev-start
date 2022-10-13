@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-public class DoubleKeyDownDetector : MonoBehaviour
+public class TwiceKeyDownDetector : MonoBehaviour
 {
-    public float doublePressInterval;
+    public float doubleKeyDownInterval;
 
-    public bool HasBeenPressedTwice { get; private set; }
+    public bool HasDetected { get; private set; }
 
     private readonly static KeyCode[] observeKeyCodes = new[] { KeyCode.DownArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.LeftArrow };
 
@@ -17,12 +17,12 @@ public class DoubleKeyDownDetector : MonoBehaviour
     {
         if (ResetWhenIddle() || !Input.anyKeyDown) return;
 
-        var keyDown = observeKeyCodes.First(arrow => Input.GetKeyDown(arrow));
+        var keyDown = observeKeyCodes.FirstOrDefault(arrow => Input.GetKeyDown(arrow));
 
         if (keyDown == KeyCode.None) return;
 
         if (lastKeyDown == keyDown)
-            HasBeenPressedTwice = Time.time - lastKeyDownTime < doublePressInterval;
+            HasDetected = Time.time - lastKeyDownTime < doubleKeyDownInterval;
 
         lastKeyDown = keyDown;
         lastKeyDownTime = Time.time;
@@ -30,8 +30,8 @@ public class DoubleKeyDownDetector : MonoBehaviour
 
     private bool ResetWhenIddle()
     {
-        var reset = IsIddle() && HasBeenPressedTwice;
-        if (reset) HasBeenPressedTwice = false;
+        var reset = IsIddle() && HasDetected;
+        if (reset) HasDetected = false;
         return reset;
     }
 
