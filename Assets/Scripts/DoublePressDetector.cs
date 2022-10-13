@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Linq;
+using System.Linq;
+using System;
 
 public class DoublePressDetector : MonoBehaviour
 {
@@ -9,33 +11,30 @@ public class DoublePressDetector : MonoBehaviour
 
     private readonly static KeyCode[] observeKeyCodes = new[] { KeyCode.DownArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.LeftArrow };
 
-    private readonly SizedList<(KeyCode keyCode, float keyDownAt)> pressed = new(2);
+    private KeyCode lastKeyDown;
+
+    private float? lastKeyDownTime;
 
     private void Update()
     {
-        var reset = IsIddle() && HasBeenPressedTwice;
-        if (reset)
-        {
-            HasBeenPressedTwice = false;
-            return;
-        }
-
-        if (!Input.anyKeyDown) return;
+        if (ResetWhenIddle() || !Input.anyKeyDown) return;
 
         var keyDown = observeKeyCodes.First(arrow => Input.GetKeyDown(arrow));
 
         if (keyDown == KeyCode.None) return;
 
-        var otherDirection = pressed.Any() && pressed.Any(x => x.keyCode != keyDown);
-        if (otherDirection) pressed.Clear();
+        if (lastKeyDown == keyDown)
+            HasBeenPressedTwice = Time.time - lastKeyDownTime < doublePressInterval;
 
-        pressed.Add((keyDown, Time.time));
+        lastKeyDown = keyDown;
+        lastKeyDownTime = Time.time;
+    }
 
-        if (pressed.Count() < 2) return;
-
-        var first = pressed[0];
-        var second = pressed[1];
-        HasBeenPressedTwice = second.keyDownAt - first.keyDownAt < doublePressInterval;
+    private bool ResetWhenIddle()
+    {
+        var reset = IsIddle() && HasBeenPressedTwice;
+        if (reset) HasBeenPressedTwice = false;
+        return reset;
     }
 
     private static bool IsIddle()
