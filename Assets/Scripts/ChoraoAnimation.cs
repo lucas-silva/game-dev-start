@@ -1,18 +1,17 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ChoraoAnimation : MonoBehaviour
 {
-    private static readonly string transitionParameterName = "transition";
+    private Chorao Chorao;
 
-    private Chorao chorao;
-
-    private Animator animator;
+    private Animator Animator;
 
     public void Start()
     {
-        chorao = GetComponent<Chorao>();
-        animator = GetComponent<Animator>();
+        Chorao = GetComponent<Chorao>();
+        Animator = GetComponent<Animator>();
     }
 
     public void Update()
@@ -23,13 +22,16 @@ public class ChoraoAnimation : MonoBehaviour
 
     private void SetAnimationByState()
     {
-        animator.SetInteger(transitionParameterName, (int)GetAnimationState());
+        var state = GetAnimationState();
+        var animateAction = AnimationMap[state];
+        animateAction(Animator);
     }
 
     private AnimationState GetAnimationState()
     {
-        if (chorao.IsRunning) return AnimationState.Running;
-        if (chorao.IsMoving) return AnimationState.Walking;
+        if (Chorao.IsRolling) return AnimationState.Rolling;
+        if (Chorao.IsRunning) return AnimationState.Running;
+        if (Chorao.IsMoving) return AnimationState.Walking;
         return AnimationState.Idle;
     }
 
@@ -41,17 +43,30 @@ public class ChoraoAnimation : MonoBehaviour
 
     private Direction? GetDirection()
     {
-        if (chorao.direction.x > 0) return Direction.Right;
-        if (chorao.direction.x < 0) return Direction.Left;
+        if (Chorao.Direction.x > 0) return Direction.Right;
+        if (Chorao.Direction.x < 0) return Direction.Left;
         return null;
     }
 
     private enum AnimationState
     {
-        Idle = 0,
-        Walking = 1,
-        Running = 2,
+        Idle,
+        Walking,
+        Running,
+        Rolling
     }
+
+    private static readonly string TransitionParameter = "transition";
+
+    private static readonly string RollingParameter = "rolling";
+
+    private readonly Dictionary<AnimationState, Action<Animator>> AnimationMap = new()
+    {
+        { AnimationState.Idle, (Animator a) => a.SetInteger(TransitionParameter, 0) },
+        { AnimationState.Walking, (Animator a) => a.SetInteger(TransitionParameter, 1) },
+        { AnimationState.Running, (Animator a) => a.SetInteger(TransitionParameter, 2) },
+        { AnimationState.Rolling, (Animator a) => a.SetTrigger(RollingParameter) },
+    };
 
     private enum Direction
     {

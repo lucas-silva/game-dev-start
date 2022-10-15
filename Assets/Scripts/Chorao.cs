@@ -2,17 +2,19 @@ using UnityEngine;
 
 public class Chorao : MonoBehaviour
 {
-    public float speed;
+    public float Speed;
 
-    public float runningSpeed;
+    public float RunningSpeed;
 
-    public Vector2 direction;
+    public Vector2 Direction { get; private set; }
+
+    public bool IsRolling { get; private set; }
 
     public bool IsMoving
     {
         get
         {
-            return direction.sqrMagnitude > 0;
+            return Direction.sqrMagnitude > 0;
         }
     }
 
@@ -20,7 +22,7 @@ public class Chorao : MonoBehaviour
     {
         get
         {
-            return twiceKeyDownDetector.HasDetected;
+            return TwiceArrowDownDetector.HasDetected;
         }
     }
 
@@ -28,27 +30,28 @@ public class Chorao : MonoBehaviour
     {
         get
         {
-            return IsRunning ? runningSpeed : speed;
+            return IsRunning ? RunningSpeed : Speed;
         }
     }
 
-    private Rigidbody2D rigbody;
+    private Rigidbody2D Rigbody;
 
-    private TwiceKeyDownDetector twiceKeyDownDetector;
+    private TwiceArrowDownDetector TwiceArrowDownDetector;
 
     private void Start()
     {
-        rigbody = GetComponent<Rigidbody2D>();
-        twiceKeyDownDetector = GetComponent<TwiceKeyDownDetector>();
+        Rigbody = GetComponent<Rigidbody2D>();
+        TwiceArrowDownDetector = GetComponent<TwiceArrowDownDetector>();
     }
 
     private void Update()
     {
-        direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        IsRolling = Input.GetKeyUp(KeyCode.LeftShift);
     }
 
     private void FixedUpdate()
     {
-        rigbody.MovePosition(CurrentSpeed * Time.fixedDeltaTime * direction + rigbody.position);
+        Rigbody.MovePosition(CurrentSpeed * Time.fixedDeltaTime * Direction + Rigbody.position);
     }
 }
