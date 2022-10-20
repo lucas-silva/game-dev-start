@@ -10,29 +10,11 @@ public class Chorao : MonoBehaviour
 
     public bool IsRolling { get; private set; }
 
-    public bool IsMoving
-    {
-        get
-        {
-            return Direction.sqrMagnitude > 0;
-        }
-    }
+    public bool IsMoving { get => Direction.sqrMagnitude > 0; }
 
-    public bool IsRunning
-    {
-        get
-        {
-            return TwiceArrowDownDetector.HasDetected;
-        }
-    }
+    public bool IsRunning { get => TwiceArrowDownDetector.HasDetected; }
 
-    private float CurrentSpeed
-    {
-        get
-        {
-            return IsRunning ? RunningSpeed : Speed;
-        }
-    }
+    private float CurrentSpeed { get => IsRunning ? RunningSpeed : Speed; }
 
     private Rigidbody2D Rigbody;
 
@@ -50,8 +32,5 @@ public class Chorao : MonoBehaviour
         IsRolling = Input.GetKeyUp(KeyCode.LeftShift);
     }
 
-    private void FixedUpdate()
-    {
-        Rigbody.MovePosition(CurrentSpeed * Time.fixedDeltaTime * Direction + Rigbody.position);
-    }
+    private void FixedUpdate() => Rigbody.MovePosition(CurrentSpeed * Time.fixedDeltaTime * Direction + Rigbody.position);
 }

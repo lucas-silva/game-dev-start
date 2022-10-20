@@ -14,11 +14,7 @@ public class ChoraoAnimation : MonoBehaviour
         Animator = GetComponent<Animator>();
     }
 
-    public void Update()
-    {
-        SetAnimationByState();
-        RotateTowardsMovingDirection();
-    }
+    public void Update() => SetAnimationByState();
 
     private void SetAnimationByState()
     {
@@ -35,18 +31,13 @@ public class ChoraoAnimation : MonoBehaviour
         return AnimationState.Idle;
     }
 
-    private void RotateTowardsMovingDirection()
+    private readonly Dictionary<AnimationState, Action<Animator>> AnimationMap = new()
     {
-        var direction = GetDirection();
-        if (direction.HasValue) transform.eulerAngles = DirectionMap[direction.Value];
-    }
-
-    private Direction? GetDirection()
-    {
-        if (Chorao.Direction.x > 0) return Direction.Right;
-        if (Chorao.Direction.x < 0) return Direction.Left;
-        return null;
-    }
+        { AnimationState.Idle, (Animator a) => a.SetInteger(TransitionParameter, 0) },
+        { AnimationState.Walking, (Animator a) => a.SetInteger(TransitionParameter, 1) },
+        { AnimationState.Running, (Animator a) => a.SetInteger(TransitionParameter, 2) },
+        { AnimationState.Rolling, (Animator a) => a.SetTrigger(RollingParameter) },
+    };
 
     private enum AnimationState
     {
@@ -59,24 +50,4 @@ public class ChoraoAnimation : MonoBehaviour
     private static readonly string TransitionParameter = "transition";
 
     private static readonly string RollingParameter = "rolling";
-
-    private readonly Dictionary<AnimationState, Action<Animator>> AnimationMap = new()
-    {
-        { AnimationState.Idle, (Animator a) => a.SetInteger(TransitionParameter, 0) },
-        { AnimationState.Walking, (Animator a) => a.SetInteger(TransitionParameter, 1) },
-        { AnimationState.Running, (Animator a) => a.SetInteger(TransitionParameter, 2) },
-        { AnimationState.Rolling, (Animator a) => a.SetTrigger(RollingParameter) },
-    };
-
-    private enum Direction
-    {
-        Right,
-        Left
-    }
-
-    private static readonly Dictionary<Direction, Vector2> DirectionMap = new()
-    {
-        { Direction.Right, new Vector2(0, 0) },
-        { Direction.Left, new Vector2(0, 180) },
-    };
 }
