@@ -28,7 +28,11 @@ public class Chorao : MonoBehaviour
 
     private void Update()
     {
-        Direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Direction = new Vector2(
+            Input.GetAxisRaw("Horizontal"),
+            Input.GetAxisRaw("Vertical")
+        );
+
         IsRolling = Input.GetKeyUp(KeyCode.LeftShift);
     }
 

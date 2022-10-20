@@ -6,7 +6,9 @@ public class RotateTowardsInputDirection : MonoBehaviour
     public void Update()
     {
         var direction = GetDirection();
-        if (direction.HasValue) transform.eulerAngles = DirectionMap[direction.Value];
+
+        if (direction.HasValue) 
+            transform.eulerAngles = DirectionMap[direction.Value];
     }
 
     private Direction? GetDirection()

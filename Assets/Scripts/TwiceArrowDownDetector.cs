@@ -7,7 +7,13 @@ public class TwiceArrowDownDetector : MonoBehaviour
 
     public bool HasDetected { get; private set; }
 
-    private readonly static KeyCode[] ArrowsKeyCodes = new[] { KeyCode.DownArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.LeftArrow };
+    private readonly static KeyCode[] Arrows = new[]
+    {
+        KeyCode.DownArrow,
+        KeyCode.RightArrow,
+        KeyCode.UpArrow,
+        KeyCode.LeftArrow
+    };
 
     private KeyCode LastKeyDown;
 
@@ -19,7 +25,7 @@ public class TwiceArrowDownDetector : MonoBehaviour
 
         if (HasDetected) return;
 
-        var keyDown = ArrowsKeyCodes.FirstOrDefault(arrow => Input.GetKeyDown(arrow));
+        var keyDown = Arrows.FirstOrDefault(arrow => Input.GetKeyDown(arrow));
 
         if (keyDown == default) return;
 

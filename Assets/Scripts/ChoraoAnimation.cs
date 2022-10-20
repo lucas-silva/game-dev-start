@@ -18,28 +18,28 @@ public class ChoraoAnimation : MonoBehaviour
 
     private void SetAnimationByState()
     {
-        var state = GetAnimationState();
-        var animateAction = AnimationMap[state];
-        animateAction(Animator);
+        var state = GetState();
+        var animate = AnimateByState[state];
+        animate(Animator);
     }
 
-    private AnimationState GetAnimationState()
+    private State GetState()
     {
-        if (Chorao.IsRolling) return AnimationState.Rolling;
-        if (Chorao.IsRunning) return AnimationState.Running;
-        if (Chorao.IsMoving) return AnimationState.Walking;
-        return AnimationState.Idle;
+        if (Chorao.IsRolling) return State.Rolling;
+        if (Chorao.IsRunning) return State.Running;
+        if (Chorao.IsMoving) return State.Walking;
+        return State.Idle;
     }
 
-    private readonly Dictionary<AnimationState, Action<Animator>> AnimationMap = new()
+    private readonly Dictionary<State, Action<Animator>> AnimateByState = new()
     {
-        { AnimationState.Idle, (Animator a) => a.SetInteger(TransitionParameter, 0) },
-        { AnimationState.Walking, (Animator a) => a.SetInteger(TransitionParameter, 1) },
-        { AnimationState.Running, (Animator a) => a.SetInteger(TransitionParameter, 2) },
-        { AnimationState.Rolling, (Animator a) => a.SetTrigger(RollingParameter) },
+        { State.Idle,    a => a.SetInteger(TransitionParameter, 0) },
+        { State.Walking, a => a.SetInteger(TransitionParameter, 1) },
+        { State.Running, a => a.SetInteger(TransitionParameter, 2) },
+        { State.Rolling, a => a.SetTrigger(RollingParameter) },
     };
 
-    private enum AnimationState
+    private enum State
     {
         Idle,
         Walking,
