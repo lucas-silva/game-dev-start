@@ -21,7 +21,7 @@ public class TwiceArrowDownDetector : MonoBehaviour
 
         var keyDown = ArrowsKeyCodes.FirstOrDefault(arrow => Input.GetKeyDown(arrow));
 
-        if (keyDown == KeyCode.None) return;
+        if (keyDown == default) return;
 
         if (LastKeyDown == keyDown)
             HasDetected = Time.time - LastKeyDownTime < DoubleKeyDownInterval;
