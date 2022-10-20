@@ -1,33 +1,14 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RotateTowardsInputDirection : MonoBehaviour
 {
-    private enum Direction
-    {
-        Right,
-        Left
-    }
+    public void Update() => transform.eulerAngles = GetEulerAngles();
 
-    private static readonly Dictionary<Direction, Vector2> DirectionMap = new()
-    {
-        { Direction.Right, new Vector2(0, 0) },
-        { Direction.Left, new Vector2(0, 180) },
-    };
-
-    public void Update()
-    {
-        var direction = GetDirection();
-
-        if (direction.HasValue) 
-            transform.eulerAngles = DirectionMap[direction.Value];
-    }
-
-    private Direction? GetDirection()
+    private Vector2 GetEulerAngles()
     {
         var x = Input.GetAxisRaw("Horizontal");
-        if (x  > 0) return Direction.Right;
-        if (x < 0) return Direction.Left;
-        return null;
+        if (x  > 0) return new Vector2(0, 0);
+        if (x < 0) return new Vector2(0, 180);
+        return transform.eulerAngles;
     }
 }

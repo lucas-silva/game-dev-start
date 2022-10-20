@@ -21,12 +21,11 @@ public class Chorao : MonoBehaviour
 
     private void Update()
     {
+        IsRolling = Input.GetKeyUp(KeyCode.LeftShift);
         Direction = new Vector2(
             Input.GetAxisRaw("Horizontal"),
             Input.GetAxisRaw("Vertical")
         );
-
-        IsRolling = Input.GetKeyUp(KeyCode.LeftShift);
     }
 
     private void FixedUpdate() => Rigbody.MovePosition(

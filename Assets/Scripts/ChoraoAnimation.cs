@@ -29,14 +29,7 @@ public class ChoraoAnimation : MonoBehaviour
         Animator = GetComponent<Animator>();
     }
 
-    public void Update() => SetAnimationByState();
-
-    private void SetAnimationByState()
-    {
-        var state = GetState();
-        var animate = AnimateByState[state];
-        animate(Animator);
-    }
+    public void Update() => AnimateByState[GetState()](Animator);
 
     private State GetState()
     {
