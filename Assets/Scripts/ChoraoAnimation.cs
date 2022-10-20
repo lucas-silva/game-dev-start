@@ -4,8 +4,23 @@ using UnityEngine;
 
 public class ChoraoAnimation : MonoBehaviour
 {
-    private Chorao Chorao;
+    private enum State
+    {
+        Idle,
+        Walking,
+        Running,
+        Rolling
+    }
 
+    private static readonly Dictionary<State, Action<Animator>> AnimateByState = new()
+    {
+        { State.Idle, a => a.SetInteger("transition", 0) },
+        { State.Walking, a => a.SetInteger("transition", 1) },
+        { State.Running, a => a.SetInteger("transition", 2) },
+        { State.Rolling, a => a.SetTrigger("rolling") },
+    };
+
+    private Chorao Chorao;
     private Animator Animator;
 
     public void Start()
@@ -30,24 +45,4 @@ public class ChoraoAnimation : MonoBehaviour
         if (Chorao.IsMoving) return State.Walking;
         return State.Idle;
     }
-
-    private readonly Dictionary<State, Action<Animator>> AnimateByState = new()
-    {
-        { State.Idle,    a => a.SetInteger(TransitionParameter, 0) },
-        { State.Walking, a => a.SetInteger(TransitionParameter, 1) },
-        { State.Running, a => a.SetInteger(TransitionParameter, 2) },
-        { State.Rolling, a => a.SetTrigger(RollingParameter) },
-    };
-
-    private enum State
-    {
-        Idle,
-        Walking,
-        Running,
-        Rolling
-    }
-
-    private static readonly string TransitionParameter = "transition";
-
-    private static readonly string RollingParameter = "rolling";
 }

@@ -3,6 +3,18 @@ using UnityEngine;
 
 public class RotateTowardsInputDirection : MonoBehaviour
 {
+    private enum Direction
+    {
+        Right,
+        Left
+    }
+
+    private static readonly Dictionary<Direction, Vector2> DirectionMap = new()
+    {
+        { Direction.Right, new Vector2(0, 0) },
+        { Direction.Left, new Vector2(0, 180) },
+    };
+
     public void Update()
     {
         var direction = GetDirection();
@@ -18,16 +30,4 @@ public class RotateTowardsInputDirection : MonoBehaviour
         if (x < 0) return Direction.Left;
         return null;
     }
-
-    private enum Direction
-    {
-        Right,
-        Left
-    }
-
-    private static readonly Dictionary<Direction, Vector2> DirectionMap = new()
-    {
-        { Direction.Right, new Vector2(0, 0) },
-        { Direction.Left, new Vector2(0, 180) },
-    };
 }

@@ -3,11 +3,7 @@ using UnityEngine;
 
 public class TwiceArrowDownDetector : MonoBehaviour
 {
-    public float DoubleKeyDownInterval;
-
-    public bool HasDetected { get; private set; }
-
-    private readonly static KeyCode[] Arrows = new[]
+    private static readonly KeyCode[] Arrows = new[]
     {
         KeyCode.DownArrow,
         KeyCode.RightArrow,
@@ -15,8 +11,10 @@ public class TwiceArrowDownDetector : MonoBehaviour
         KeyCode.LeftArrow
     };
 
-    private KeyCode LastKeyDown;
+    public float DoubleKeyDownInterval;
+    public bool HasDetected { get; private set; }
 
+    private KeyCode LastKeyDown;
     private float? LastKeyDownTime;
 
     private void Update()
