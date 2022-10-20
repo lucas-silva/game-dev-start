@@ -15,7 +15,9 @@ public class TwiceArrowDownDetector : MonoBehaviour
 
     private void Update()
     {
-        if (ResetWhenIddle() || !Input.anyKeyDown) return;
+        if (HasDetected && IsIddle()) HasDetected = false;
+
+        if (HasDetected) return;
 
         var keyDown = ArrowsKeyCodes.FirstOrDefault(arrow => Input.GetKeyDown(arrow));
 
@@ -28,17 +30,7 @@ public class TwiceArrowDownDetector : MonoBehaviour
         LastKeyDownTime = Time.time;
     }
 
-    private bool ResetWhenIddle()
-    {
-        var shouldReset = IsIddle() && HasDetected;
-        if (shouldReset) HasDetected = false;
-        return shouldReset;
-    }
-
-    private static bool IsIddle()
-    {
-        var direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        var iddle = direction.sqrMagnitude == 0;
-        return iddle;
-    }
+    private static bool IsIddle() =>
+        Input.GetAxisRaw("Horizontal") == 0 &&
+        Input.GetAxisRaw("Vertical") == 0;
 }

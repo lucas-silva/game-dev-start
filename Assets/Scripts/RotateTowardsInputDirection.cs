@@ -3,9 +3,7 @@ using UnityEngine;
 
 public class RotateTowardsInputDirection : MonoBehaviour
 {
-    public void Update() => RotateTowardsMovingDirection();
-
-    private void RotateTowardsMovingDirection()
+    public void Update()
     {
         var direction = GetDirection();
         if (direction.HasValue) transform.eulerAngles = DirectionMap[direction.Value];
