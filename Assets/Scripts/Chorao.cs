@@ -6,6 +6,7 @@ public class Chorao : MonoBehaviour
     public float RunningSpeed;
     public bool IsRolling { get; private set; }
     public bool IsMoving { get => Direction.sqrMagnitude > 0; }
+    public bool IsWalking { get => IsMoving && !IsRunning; }
     public bool IsRunning { get => TwiceArrowDownDetector.HasDetected; }
 
     private float CurrentSpeed { get => IsRunning ? RunningSpeed : Speed; }
@@ -29,6 +30,6 @@ public class Chorao : MonoBehaviour
     }
 
     private void FixedUpdate() => Rigbody.MovePosition(
-        CurrentSpeed * Time.fixedDeltaTime * Direction + Rigbody.position
+        Time.fixedDeltaTime * CurrentSpeed * Direction + Rigbody.position 
     );
 }
