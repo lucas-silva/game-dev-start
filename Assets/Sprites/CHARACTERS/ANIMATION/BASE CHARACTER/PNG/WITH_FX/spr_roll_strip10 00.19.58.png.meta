@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f1dee171e1a4e494a8db448e7d8ec331
+guid: 89574c901163c4da1a57d446a1a6f200
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,6 +64,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
@@ -70,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -102,7 +104,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
+    buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -114,11 +116,11 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: iPhone
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -129,7 +131,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spr_roll_strip10_0
+      name: spr_roll_strip10 00.19.58_0
       rect:
         serializedVersion: 2
         x: 0
@@ -143,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f72592faebf64b2698f17119c2923a1
-      internalID: -2113699332
+      spriteID: 858bdcdaa12d4479ea07ec0cb2faa2c8
+      internalID: 260485231
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_roll_strip10_1
+      name: spr_roll_strip10 00.19.58_1
       rect:
         serializedVersion: 2
         x: 96
@@ -164,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d780e8eff27014c2baa426d83d906a49
-      internalID: 273188482
+      spriteID: eb35c4a0e6af74ce888a1558c7980728
+      internalID: -283298724
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_roll_strip10_2
+      name: spr_roll_strip10 00.19.58_2
       rect:
         serializedVersion: 2
         x: 192
@@ -185,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7d1ec3ccc9a24961b637b0b74cb88d1
-      internalID: -1300607184
+      spriteID: e66ece39307a04b4c8b8148ae24119a7
+      internalID: 676070487
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_roll_strip10_3
+      name: spr_roll_strip10 00.19.58_3
       rect:
         serializedVersion: 2
         x: 288
@@ -206,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6cb780a932b0f4d5c854b81a43021b49
-      internalID: 1252486709
+      spriteID: 7e2f61b3fcd864b38a6871ad29c9a39f
+      internalID: 1494864334
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_roll_strip10_4
+      name: spr_roll_strip10 00.19.58_4
       rect:
         serializedVersion: 2
         x: 384
@@ -227,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 065519b86e57c4319818fefbcfa25031
-      internalID: 2117764711
+      spriteID: a20a953d8f8c249b08897d6158b4eb99
+      internalID: -978641169
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_roll_strip10_5
+      name: spr_roll_strip10 00.19.58_5
       rect:
         serializedVersion: 2
         x: 480
@@ -248,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b43f28e720b44a83a213bb29856590d
-      internalID: -440297831
+      spriteID: b7440beea24c948fb9dcf1162b097edc
+      internalID: 1979764400
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_roll_strip10_6
+      name: spr_roll_strip10 00.19.58_6
       rect:
         serializedVersion: 2
         x: 576
@@ -269,14 +271,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52ec3f36d8a4a41ac813e467baf2f472
-      internalID: -2019438821
+      spriteID: 6ced4b1f1c4314c3399e8224590dbb67
+      internalID: 1302271685
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_roll_strip10_7
+      name: spr_roll_strip10 00.19.58_7
       rect:
         serializedVersion: 2
         x: 672
@@ -290,14 +292,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9607ae902691c4b38a4eea41a7c9269a
-      internalID: 1367167997
+      spriteID: 6261fe5f1831b4e9c991d9f69ec2ba8c
+      internalID: 536973018
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_roll_strip10_8
+      name: spr_roll_strip10 00.19.58_8
       rect:
         serializedVersion: 2
         x: 768
@@ -311,14 +313,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c1c110faaed4441d0ab189e3f4197e47
-      internalID: -659173927
+      spriteID: 4831038a3f0264e74a44c76145e354b0
+      internalID: -1318479001
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_roll_strip10_9
+      name: spr_roll_strip10 00.19.58_9
       rect:
         serializedVersion: 2
         x: 864
@@ -332,8 +334,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11babfbe9fa3a46a5ab5acf0857ee192
-      internalID: -1829974811
+      spriteID: a024308d19a994cb6a37a6327ce7beff
+      internalID: 726393306
       vertices: []
       indices: 
       edges: []
@@ -349,19 +351,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spr_roll_strip10_0: -2113699332
-      spr_roll_strip10_2: -1300607184
-      spr_roll_strip10_8: -659173927
-      spr_roll_strip10_5: -440297831
-      spr_roll_strip10_7: 1367167997
-      spr_roll_strip10_4: 2117764711
-      spr_roll_strip10_9: -1829974811
-      spr_roll_strip10_6: -2019438821
-      spr_roll_strip10_1: 273188482
-      spr_roll_strip10_3: 1252486709
-  spritePackingTag: 
+      spr_roll_strip10 00.19.58_4: -978641169
+      spr_roll_strip10 00.19.58_0: 260485231
+      spr_roll_strip10 00.19.58_9: 726393306
+      spr_roll_strip10 00.19.58_2: 676070487
+      spr_roll_strip10 00.19.58_6: 1302271685
+      spr_roll_strip10 00.19.58_1: -283298724
+      spr_roll_strip10 00.19.58_5: 1979764400
+      spr_roll_strip10 00.19.58_7: 536973018
+      spr_roll_strip10 00.19.58_3: 1494864334
+      spr_roll_strip10 00.19.58_8: -1318479001
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
